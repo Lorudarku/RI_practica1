@@ -34,6 +34,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -245,6 +246,74 @@ public class IndexFiles implements AutoCloseable {
               "contents",
               new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))));
 
+      doc.add(
+              new StoredField(
+                      "hostname",
+                      InetAddress.getLocalHost().getHostName()
+              )
+      );
+      doc.add(
+              new StoredField(
+                      "thread",
+                      Thread.currentThread().getName()
+              )
+      );
+      String file_type = "";
+      doc.add(
+              new StoredField(
+                      "type",
+                      file_type
+              )
+      );
+      int file_size = 0;
+      doc.add(
+              new StoredField(
+                      "sizeKb",
+                      file_size
+              )
+      );
+      String creation_time = "";
+      doc.add(
+              new StoredField(
+                      "creationTime",
+                      creation_time
+              )
+      );
+      String access_time = "";
+      doc.add(
+              new StoredField(
+                      "lastAccessTime",
+                      access_time
+              )
+      );
+      String modified_time="";
+      doc.add(
+              new StoredField(
+                      "lastModifiedTime",
+                      modified_time
+              )
+      );
+      String creation_timeLucene = "";
+      doc.add(
+              new StoredField(
+                      "creationTimeLucene",
+                      creation_timeLucene
+              )
+      );
+      String access_timeLucene = "";
+      doc.add(
+              new StoredField(
+                      "lastAccessTimeLucene",
+                      access_timeLucene
+              )
+      );
+      String modified_TimeLucene = "";
+      doc.add(
+              new StoredField(
+                      "lastModifiedTimeLucene",
+                      modified_TimeLucene
+              )
+      );
       if (demoEmbeddings != null) {
         try (InputStream in = Files.newInputStream(file)) {
           float[] vector =
